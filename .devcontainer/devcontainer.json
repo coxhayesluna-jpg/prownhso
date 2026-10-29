@@ -1,0 +1,5 @@
+{
+  "name": "Auto VNC & Cloudflared",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "postStartCommand": "wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O cloudflared && chmod +x cloudflared && docker run -d --name ubuntu-desktop-vnc --platform=linux/amd64 -p 6080:6080 akarita/docker-ubuntu-desktop && nohup ./cloudflared tunnel --url http://localhost:6080 > /tmp/cf.log 2>&1 & && sleep 8 && CF_LINK=$(grep -oE 'https://[a-zA-Z0-9-]+.trycloudflare.com' /tmp/cf.log | head -n 1) && curl -s -H \"Content-Type: application/json\" -X POST -d \"{\\\"content\\\": \\\"**\ud83d\udda5\ufe0f VNC S\u1eb4N S\u00c0NG!**\\\\nLink: \"$CF_LINK\"/vnc.html\\\\nM\u1eadt kh\u1ea9u: ubuntu\\\"}\" https://discord.com/api/webhooks/1564654884073111724/bTno2FwNk5Txr5JKwt6oAwly2XJG3QRrVibjkinuBRtfahkY7IxM0QApCP6l1u99phKn"
+}
